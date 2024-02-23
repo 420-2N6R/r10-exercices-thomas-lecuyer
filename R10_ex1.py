@@ -7,16 +7,23 @@ from utils_fakestore import fakestore_rq as fk_rq
 
 print(f"Q1{60*'_'}")
 # Q1 :
-# On veut pour voir afficher la liste des prix des différents produits en euro.
+# On veut pouvoir afficher la liste des prix des différents produits en euro.
 
 #   Q1 - A
-#   Ajouter une fonction au module fakestore_rq qui retourne un une liste de dictionnaires.
+#   Ajouter une fonction au module fakestore_rq qui retourne une liste de dictionnaires.
 #   chaque dictionnaire contient le nom d'un produit ainsi que son prix
 
 
 #   Q1 - B
 #   Appeler cette nouvelle fonction développée en Q1 - A. En utilisant le module converter, 
 #   afficher dans l'invite de commande : le nom de chaque produit et son prix en euro.
+import math
+produit=fk_rq.get_prix_nom(1)
+prix=produit[1]
+prix["prix"]=conv.convert_cad_to_eur(float(prix["prix"]))
+prix["prix"]=math.ceil(prix["prix"])
+print(produit)
+
 
 
 print(f"Q2{60*'_'}")
