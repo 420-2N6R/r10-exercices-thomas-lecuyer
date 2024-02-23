@@ -12,11 +12,12 @@ def mettre_produit_a_jour(produit:dict,id:int=None):
     response = rq.patch(f"{BASE_URL}/products/{id}",json=produit)
     return response.json()
 
-def get_prix_nom(produit:int):
-    res=rq.get(f"{BASE_URL}/products/{produit}")
+def get_prix_nom():
+    res=rq.get(f"{BASE_URL}/products")
     res_json=res.json()
-    nom={"nom":res_json["title"]}
-    prix={"prix":str(res_json["price"])}
-    produit_prix=[nom,prix]
-    return produit_prix
-print(get_prix_nom(1))
+    liste_produit=[]
+    for produit in res_json:
+        new_dict={"title":produit["title"],"price":produit["price"],"id":produit["id"]}
+        liste_produit.append(new_dict)
+    return liste_produit
+print(get_prix_nom())

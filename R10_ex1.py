@@ -17,13 +17,14 @@ print(f"Q1{60*'_'}")
 #   Q1 - B
 #   Appeler cette nouvelle fonction développée en Q1 - A. En utilisant le module converter, 
 #   afficher dans l'invite de commande : le nom de chaque produit et son prix en euro.
-import math
-produit=fk_rq.get_prix_nom(1)
-prix=produit[1]
-prix["prix"]=conv.convert_cad_to_eur(float(prix["prix"]))
-prix["prix"]=math.ceil(prix["prix"])
-print(produit)
 
+liste_produits=fk_rq.get_prix_nom()
+liste_euro=[]
+for line in liste_produits:
+    prix_eur=conv.convert_cad_to_eur(line["price"])
+    line["price"]=round(prix_eur,2)
+    liste_euro.append(line)
+print(liste_euro)
 
 
 print(f"Q2{60*'_'}")
@@ -36,3 +37,13 @@ print(f"Q2{60*'_'}")
 
 #   Q2 - B :
 #   En utilisant la fonction "mettre_produit_a_jour" du module fakestore_rq, mettez à jour tous les prix des produits pour qu'ils soient en jpy.
+liste_jpy=[]
+for line in liste_produits:
+    prix_jpy=conv.convert_cad_to_jpy(line["price"])
+    line["price"]=round(prix_jpy,2)
+    liste_jpy.append(line)
+print(liste_jpy)
+
+for ligne in liste_jpy:
+    retour=fk_rq.mettre_produit_a_jour(ligne)
+    print(retour)
